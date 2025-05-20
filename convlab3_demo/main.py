@@ -1,6 +1,9 @@
 import convlab
+# NLU component (from convlab/nlu/svm/)
 from convlab.nlu.svm.multiwoz import SVMNLU
-from convlab.policy.rule.multiwoz import RulePolicy
+# Policy component (from convlab/policy/mle/ - previously rule)
+from convlab.policy.mle.multiwoz import MLEPolicy
+# NLG component (from convlab/nlg/template/)
 from convlab.nlg.template.multiwoz import TemplateNLG
 # Optional: For more detailed logging from ConvLab components
 # import logging
@@ -22,7 +25,7 @@ def run_simulated_dialogue():
     try:
         # 1. Natural Language Understanding (NLU)
         print("Loading NLU model (SVMNLU for MultiWOZ)...")
-        # This model might require prior download. Check ConvLab-3 documentation.
+        # Located in: convlab/nlu/svm/
         # Example download commands (run in your terminal):
         # python -m convlab.util.download multiwoz
         # python -m convlab.util.download multiwoz_svm_nlu
@@ -30,12 +33,16 @@ def run_simulated_dialogue():
         print("NLU model loaded.")
 
         # 2. Dialogue Policy
-        print("Loading Policy model (RulePolicy for MultiWOZ)...")
-        policy = RulePolicy()
+        print("Loading Policy model (MLEPolicy for MultiWOZ)...") # Using MLEPolicy
+        # Located in: convlab/policy/mle/
+        # Example download command for MLEPolicy (check ConvLab-3 docs for exact command):
+        # python -m convlab.util.download multiwoz_mle_policy
+        policy = MLEPolicy() # Using MLEPolicy
         print("Policy model loaded.")
 
         # 3. Natural Language Generation (NLG)
         print("Loading NLG model (TemplateNLG for MultiWOZ)...")
+        # Located in: convlab/nlg/template/
         nlg = TemplateNLG(is_user=False) # System NLG
         print("NLG model loaded.")
 
@@ -43,9 +50,10 @@ def run_simulated_dialogue():
         print(f"Error initializing ConvLab-3 components: {e}")
         print("Please ensure you have installed ConvLab-3 correctly and downloaded any necessary models.")
         print("For MultiWOZ models, you might need to run commands like (in your terminal):")
-        print("  `python -m convlab.util.download multiwoz`")
-        print("  `python -m convlab.util.download multiwoz_svm_nlu` (or other model-specific downloads)")
-        print("Refer to ConvLab-3 documentation for specific model requirements.")
+        print("  `python -m convlab.util.download multiwoz` (for the dataset)")
+        print("  `python -m convlab.util.download multiwoz_svm_nlu` (for SVMNLU)")
+        print("  `python -m convlab.util.download multiwoz_mle_policy` (for MLEPolicy - check exact name)")
+        print("Refer to ConvLab-3 documentation for specific model requirements and download commands.")
         return
 
     print("\n--- Starting Simulated Dialogue Session (MultiWOZ) ---")
@@ -116,5 +124,6 @@ if __name__ == "__main__":
     print("This script demonstrates a simulated dialogue session with MultiWOZ components.")
     print("Ensure you have ConvLab-3 installed (pip install convlab3).")
     print("And necessary models downloaded (e.g., using 'python -m convlab.util.download multiwoz').")
-    print("You might also need specific NLU models like 'multiwoz_svm_nlu'.")
+    print("This example now uses SVMNLU, MLEPolicy, and TemplateNLG.")
+    print("You might need to download 'multiwoz_svm_nlu' and 'multiwoz_mle_policy' (check exact names).")
     run_simulated_dialogue()
