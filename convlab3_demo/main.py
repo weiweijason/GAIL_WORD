@@ -1,8 +1,9 @@
 import convlab
 # NLU component (from convlab/nlu/svm/)
 from convlab.nlu.svm.multiwoz import SVMNLU
-# Policy component (from convlab/policy/mle/ - previously rule)
-from convlab.policy.mle.multiwoz import MLEPolicy
+# Policy component (from convlab/policy/mle/)
+# from convlab.policy.mle.multiwoz import MLEPolicy # Previous attempt
+from convlab.policy.mle import MLEPolicy # Updated import
 # NLG component (from convlab/nlg/template/)
 from convlab.nlg.template.multiwoz import TemplateNLG
 # Optional: For more detailed logging from ConvLab components
